@@ -22,6 +22,7 @@
 
 ## News
 
+- **April 2026**: GenTract was accepted as a **highlight** paper.
 - **February 2026**: GenTract was accepted at **CVPR 2026**.
 
 ## Status
