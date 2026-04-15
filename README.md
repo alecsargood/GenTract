@@ -1,6 +1,6 @@
 <div align="center">
 
-# GenTract (CVPR 2026)
+# GenTract (CVPR 2026 Highlight)
 
 [![CVPR 2026](https://img.shields.io/badge/CVPR-2026-0A66C2?style=for-the-badge)](https://cvpr.thecvf.com/)
 [![arXiv](https://img.shields.io/badge/arXiv-2511.13183-B31B1B?style=for-the-badge&logo=arxiv&logoColor=white)](https://arxiv.org/abs/2511.13183)
