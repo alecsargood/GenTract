@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>GenTract: Generative Global Tractography</title>
+<meta name="description" content="GenTract: Generative Global Tractography (CVPR 2026) — the first generative model for global tractography from diffusion MRI." />
+<meta property="og:title" content="GenTract: Generative Global Tractography" />
+<meta property="og:description" content="The first generative model for global tractography from diffusion MRI. CVPR 2026." />
+<meta property="og:image" content="assets/gentract.gif" />
+<meta property="og:type" content="website" />
+<style>
+  :root{
+    --bg:#0e1116; --panel:#161b22; --text:#e6edf3; --muted:#9aa7b4;
+    --accent:#4f8cff; --accent-2:#7c5cff; --border:#222c39; --code:#0b0f14;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0; background:var(--bg); color:var(--text);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    line-height:1.6; -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:900px; margin:0 auto; padding:0 20px}
+  header{padding:64px 0 28px; text-align:center}
+  .venue{
+    display:inline-block; font-size:.8rem; letter-spacing:.12em; text-transform:uppercase;
+    color:var(--accent); border:1px solid var(--border); border-radius:999px;
+    padding:5px 14px; margin-bottom:20px; background:var(--panel);
+  }
+  h1{
+    font-size:2.5rem; line-height:1.15; margin:.2em 0 .35em; font-weight:800;
+    background:linear-gradient(90deg,var(--accent),var(--accent-2));
+    -webkit-background-clip:text; background-clip:text; color:transparent;
+  }
+  .authors{font-size:1.12rem; margin:.4em 0 .2em}
+  .authors a{color:var(--text); text-decoration:none; border-bottom:1px solid transparent}
+  .authors a:hover{border-bottom-color:var(--accent)}
+  .authors sup{color:var(--accent); font-weight:700}
+  .affil{color:var(--muted); font-size:.95rem; margin:.5em auto 0; max-width:760px}
+  .affil span{white-space:nowrap}
+  .links{display:flex; flex-wrap:wrap; gap:12px; justify-content:center; margin:28px 0 8px}
+  .btn{
+    display:inline-flex; align-items:center; gap:8px; text-decoration:none;
+    color:var(--text); background:var(--panel); border:1px solid var(--border);
+    padding:10px 18px; border-radius:10px; font-weight:600; transition:.18s;
+  }
+  .btn:hover{border-color:var(--accent); transform:translateY(-1px)}
+  .btn svg{width:16px; height:16px; fill:currentColor}
+  section{padding:34px 0; border-top:1px solid var(--border)}
+  .teaser{padding-top:18px}
+  .teaser img{width:100%; max-width:760px; border-radius:14px; border:1px solid var(--border); display:block; margin:0 auto}
+  .teaser .cap{color:var(--muted); font-size:.9rem; text-align:center; margin-top:12px}
+  h2{font-size:1.5rem; margin:0 0 .6em; text-align:center}
+  .abstract p{color:#cdd7e1; font-size:1.05rem; text-align:justify}
+  pre{
+    background:var(--code); border:1px solid var(--border); border-radius:10px;
+    padding:18px; overflow:auto; font-size:.88rem; color:#cdd7e1;
+  }
+  code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+  .highlight{color:var(--accent); font-weight:700}
+  footer{padding:40px 0 60px; text-align:center; color:var(--muted); font-size:.88rem}
+  footer a{color:var(--muted)}
+  @media(max-width:600px){h1{font-size:1.9rem} header{padding-top:40px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div class="venue">CVPR 2026</div>
+    <h1>GenTract:<br/>Generative Global Tractography</h1>
+    <div class="authors">
+      Alec Sargood<sup>1</sup>,
+      Lemuel Puglisi<sup>2</sup>,
+      Elinor Thompson<sup>1</sup>,
+      Mirco Musolesi<sup>3</sup>,
+      Daniel C. Alexander<sup>1</sup>
+    </div>
+    <div class="affil">
+      <span><sup>1</sup>Hawkes Institute &amp; Dept. of Computer Science, UCL, UK</span> &nbsp;
+      <span><sup>2</sup>Dept. of Maths &amp; Computer Science, University of Catania, Italy</span> &nbsp;
+      <span><sup>3</sup>AI Centre &amp; Dept. of Computer Science, UCL, UK</span>
+    </div>
+
+    <div class="links">
+      <a class="btn" href="https://openaccess.thecvf.com/content/CVPR2026/papers/Sargood_GenTract_Generative_Global_Tractography_CVPR_2026_paper.pdf" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24"><path d="M6 2h9l5 5v15a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1zm8 1.5V8h4.5L14 3.5z"/></svg>
+        Paper
+      </a>
+      <a class="btn" href="https://arxiv.org/abs/2511.13183" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24"><path d="M3 4h18v2H3zm0 7h18v2H3zm0 7h12v2H3z"/></svg>
+        arXiv
+      </a>
+      <a class="btn" href="https://github.com/alecsargood/GenTract" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24"><path d="M12 .5A11.5 11.5 0 0 0 .5 12 11.5 11.5 0 0 0 8.4 23c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.4-4-1.4-.5-1.4-1.3-1.8-1.3-1.8-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.8-1.6-2.7-.3-5.5-1.3-5.5-5.9 0-1.3.5-2.4 1.2-3.2-.1-.3-.5-1.5.1-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0C17 5 18 5.3 18 5.3c.6 1.7.2 2.9.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.6-2.8 5.6-5.5 5.9.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A11.5 11.5 0 0 0 23.5 12 11.5 11.5 0 0 0 12 .5z"/></svg>
+        Code
+      </a>
+      <a class="btn" href="#bibtex">
+        <svg viewBox="0 0 24 24"><path d="M7 4h10v2H7zm0 4h10v2H7zm0 4h7v2H7zm0 4h7v2H7z"/></svg>
+        BibTeX
+      </a>
+    </div>
+  </header>
+
+  <section class="teaser">
+    <img src="assets/gentract.gif" alt="GenTract generated tractography" />
+    <div class="cap">GenTract generates complete, anatomically plausible streamlines directly from diffusion MRI.</div>
+  </section>
+
+  <section class="abstract">
+    <h2>Abstract</h2>
+    <p>
+      Tractography is the process of inferring the trajectories of white-matter pathways in the brain
+      from diffusion magnetic resonance imaging (dMRI). Local tractography methods, which construct
+      streamlines by following local fiber orientation estimates stepwise through an image, are prone to
+      error accumulation and high false positive rates, particularly on noisy or low-resolution data.
+      In contrast, global methods, which attempt to optimize a collection of streamlines to maximize
+      compatibility with underlying fiber orientation estimates, are computationally expensive. To address
+      these challenges, we introduce GenTract, the first generative model for global tractography. We frame
+      tractography as a generative task, learning a direct mapping from dMRI to complete, anatomically
+      plausible streamlines. We compare both diffusion-based and flow matching paradigms and evaluate
+      GenTract's performance against state-of-the-art baselines. Notably, GenTract achieves precision
+      <span class="highlight">1.8&times;</span> and <span class="highlight">2.1&times;</span> higher than the
+      next-best methods, DDTracking and TractOracle, respectively. This advantage becomes even more
+      pronounced in challenging low-resolution and noisy settings, where it outperforms the closest
+      competitor by a factor of <span class="highlight">3.5</span>. By producing tractograms with high
+      precision on research-grade data while also maintaining reliability on imperfect, lower-resolution
+      data, GenTract represents a promising solution for global tractography.
+    </p>
+  </section>
+
+  <section id="bibtex">
+    <h2>BibTeX</h2>
+    <pre><code>@inproceedings{sargood2026gentract,
+  title     = {GenTract: Generative Global Tractography},
+  author    = {Sargood, Alec and Puglisi, Lemuel and Thompson, Elinor
+               and Musolesi, Mirco and Alexander, Daniel C.},
+  booktitle = {Proceedings of the IEEE/CVF Conference on Computer Vision
+               and Pattern Recognition (CVPR)},
+  year      = {2026}
+}</code></pre>
+  </section>
+
+  <footer>
+    Code: <a href="https://github.com/alecsargood/GenTract" target="_blank" rel="noopener">github.com/alecsargood/GenTract</a>
+    &nbsp;·&nbsp; Page template is free to reuse.
+  </footer>
+
+</div>
+</body>
+</html>
