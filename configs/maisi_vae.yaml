@@ -1,0 +1,28 @@
+data:
+  data_dir: "./data/odf"
+  bbox_csv: "./data/examples/bbox.csv"
+  stats_csv: "./data/examples/dists.csv"
+  cache: false
+  resolution: 1.875
+  num_workers: 4
+  augment_train: false
+
+vae:
+  pretrained: ""
+
+model:
+  num_unet_layers: 4
+
+training:
+  model: "maisi"
+  lr: 0.00005
+  batch_size: 2
+  n_epochs: 50
+  val_interval: 3
+
+paths:
+  base_dir: "."
+
+wandb:
+  enabled: false
+  project: "gentract-open-vae"

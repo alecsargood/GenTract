@@ -1,0 +1,2 @@
+subject_id,odf_path,tract_path,rot,deg,split
+100307,/absolute/path/to/sub-100307_dwi_model-CSD_diffmodel.nii.gz,/absolute/path/to/tracts_100307.npy,0,0.0,train

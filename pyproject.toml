@@ -1,0 +1,31 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "gentract-open"
+version = "0.1.0"
+description = "Minimal open-source GenTract pipeline (VAE, latents, diffusion, inference)"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+  "numpy",
+  "pandas",
+  "torch",
+  "monai",
+  "monai-generative",
+  "lpips",
+  "nibabel",
+  "dipy",
+  "tqdm",
+  "pyyaml",
+  "scikit-learn",
+  "matplotlib",
+  "wandb",
+]
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
