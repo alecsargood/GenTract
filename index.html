@@ -4,16 +4,16 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>GenTract: Generative Global Tractography</title>
-<meta name="description" content="GenTract: Generative Global Tractography (CVPR 2026) — the first generative model for global tractography from diffusion MRI." />
+<meta name="description" content="GenTract: Generative Global Tractography (CVPR 2026 Highlight) — the first generative model for global tractography from diffusion MRI." />
 <meta property="og:title" content="GenTract: Generative Global Tractography" />
-<meta property="og:description" content="The first generative model for global tractography from diffusion MRI. CVPR 2026." />
+<meta property="og:description" content="The first generative model for global tractography from diffusion MRI. CVPR 2026 Highlight." />
 <meta property="og:image" content="assets/gentract.gif" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://alecsargood.github.io/GenTract/" />
 <link rel="canonical" href="https://alecsargood.github.io/GenTract/" />
 <style>
   :root{
-    --bg:#0e1116; --panel:#161b22; --text:#e6edf3; --muted:#9aa7b4;
+    --bg:#0e1116; --panel:#161b22; --panel-2:#1b2230; --text:#e6edf3; --muted:#9aa7b4;
     --accent:#4f8cff; --accent-2:#7c5cff; --border:#222c39; --code:#0b0f14;
   }
   *{box-sizing:border-box}
@@ -23,25 +23,29 @@
     font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
     line-height:1.6; -webkit-font-smoothing:antialiased;
   }
-  .wrap{max-width:900px; margin:0 auto; padding:0 20px}
-  header{padding:64px 0 28px; text-align:center}
+  /* ambient glow behind hero */
+  body::before{
+    content:""; position:fixed; top:-30vh; left:50%; transform:translateX(-50%);
+    width:120vw; height:80vh; pointer-events:none; z-index:0;
+    background:radial-gradient(closest-side, rgba(79,140,255,.16), rgba(124,92,255,.07) 45%, transparent 70%);
+  }
+  .wrap{max-width:940px; margin:0 auto; padding:0 20px; position:relative; z-index:1}
+  header{padding:64px 0 22px; text-align:center}
   .venue{
-    display:inline-block; font-size:.8rem; letter-spacing:.12em; text-transform:uppercase;
+    display:inline-block; font-size:.78rem; letter-spacing:.12em; text-transform:uppercase;
     color:var(--accent); border:1px solid var(--border); border-radius:999px;
-    padding:5px 14px; margin-bottom:20px; background:var(--panel);
+    padding:6px 15px; margin-bottom:20px; background:var(--panel);
   }
   h1{
-    font-size:2.5rem; line-height:1.15; margin:.2em 0 .35em; font-weight:800;
+    font-size:2.6rem; line-height:1.13; margin:.2em 0 .35em; font-weight:800;
     background:linear-gradient(90deg,var(--accent),var(--accent-2));
     -webkit-background-clip:text; background-clip:text; color:transparent;
   }
   .authors{font-size:1.12rem; margin:.4em 0 .2em}
-  .authors a{color:var(--text); text-decoration:none; border-bottom:1px solid transparent}
-  .authors a:hover{border-bottom-color:var(--accent)}
   .authors sup{color:var(--accent); font-weight:700}
-  .affil{color:var(--muted); font-size:.95rem; margin:.5em auto 0; max-width:760px}
+  .affil{color:var(--muted); font-size:.95rem; margin:.5em auto 0; max-width:780px}
   .affil span{white-space:nowrap}
-  .links{display:flex; flex-wrap:wrap; gap:12px; justify-content:center; margin:28px 0 8px}
+  .links{display:flex; flex-wrap:wrap; gap:12px; justify-content:center; margin:28px 0 6px}
   .btn{
     display:inline-flex; align-items:center; gap:8px; text-decoration:none;
     color:var(--text); background:var(--panel); border:1px solid var(--border);
@@ -49,21 +53,77 @@
   }
   .btn:hover{border-color:var(--accent); transform:translateY(-1px)}
   .btn svg{width:16px; height:16px; fill:currentColor}
-  section{padding:34px 0; border-top:1px solid var(--border)}
-  .teaser{padding-top:18px}
-  .teaser img{width:100%; max-width:760px; border-radius:14px; border:1px solid var(--border); display:block; margin:0 auto}
-  .teaser .cap{color:var(--muted); font-size:.9rem; text-align:center; margin-top:12px}
-  h2{font-size:1.5rem; margin:0 0 .6em; text-align:center}
+
+  /* sticky chapter nav */
+  nav.toc{
+    position:sticky; top:0; z-index:20; margin-top:18px;
+    background:rgba(14,17,22,.82); backdrop-filter:blur(10px);
+    border-top:1px solid var(--border); border-bottom:1px solid var(--border);
+  }
+  nav.toc .row{display:flex; flex-wrap:wrap; gap:8px; justify-content:center; padding:12px 0}
+  nav.toc a{
+    font-size:.86rem; text-decoration:none; color:var(--muted);
+    border:1px solid var(--border); border-radius:999px; padding:6px 14px; transition:.15s;
+  }
+  nav.toc a:hover{color:var(--text); border-color:var(--accent); background:var(--panel)}
+
+  section{padding:40px 0; border-top:1px solid var(--border)}
+  section:first-of-type{border-top:none}
+  h2{font-size:1.55rem; margin:0 0 .7em; text-align:center}
+  .lead{color:var(--muted); text-align:center; max-width:720px; margin:-.3em auto 1.6em; font-size:1rem}
+
+  .teaser{padding-top:26px; border-top:none}
+  .teaser img{width:100%; max-width:780px; border-radius:14px; border:1px solid var(--border); display:block; margin:0 auto}
+  .cap{color:var(--muted); font-size:.9rem; text-align:center; margin-top:12px}
+
   .abstract p{color:#cdd7e1; font-size:1.05rem; text-align:justify}
+  .highlight{color:var(--accent); font-weight:700}
+
+  /* key results stat cards */
+  .stats{display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-top:8px}
+  .stat{
+    background:linear-gradient(180deg,var(--panel-2),var(--panel));
+    border:1px solid var(--border); border-radius:16px; padding:26px 18px; text-align:center;
+  }
+  .stat .num{
+    font-size:2.7rem; font-weight:800; line-height:1;
+    background:linear-gradient(90deg,var(--accent),var(--accent-2));
+    -webkit-background-clip:text; background-clip:text; color:transparent;
+  }
+  .stat .lbl{margin-top:10px; font-weight:600}
+  .stat .sub{margin-top:4px; color:var(--muted); font-size:.85rem}
+
+  /* method figure */
+  .figure{background:#fff; border:1px solid var(--border); border-radius:14px; padding:16px; margin:6px 0}
+  .figure img{width:100%; display:block; border-radius:4px}
+  .two-col{display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:22px}
+  .feature{background:var(--panel); border:1px solid var(--border); border-radius:14px; padding:20px}
+  .feature h3{margin:0 0 .4em; font-size:1.05rem}
+  .feature p{margin:0; color:var(--muted); font-size:.93rem}
+
+  /* takeaways */
+  .takeaways{list-style:none; padding:0; margin:0; display:grid; gap:12px}
+  .takeaways li{
+    background:var(--panel); border:1px solid var(--border); border-radius:12px;
+    padding:14px 16px 14px 46px; position:relative; color:#cdd7e1;
+  }
+  .takeaways li::before{
+    content:"✓"; position:absolute; left:16px; top:14px; color:var(--accent); font-weight:800;
+  }
+
   pre{
     background:var(--code); border:1px solid var(--border); border-radius:10px;
     padding:18px; overflow:auto; font-size:.88rem; color:#cdd7e1;
   }
   code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
-  .highlight{color:var(--accent); font-weight:700}
-  footer{padding:40px 0 60px; text-align:center; color:var(--muted); font-size:.88rem}
+  footer{padding:40px 0 60px; text-align:center; color:var(--muted); font-size:.88rem; border-top:1px solid var(--border)}
   footer a{color:var(--muted)}
-  @media(max-width:600px){h1{font-size:1.9rem} header{padding-top:40px}}
+
+  @media(max-width:680px){
+    h1{font-size:2rem} header{padding-top:40px}
+    .stats{grid-template-columns:1fr}
+    .two-col{grid-template-columns:1fr}
+  }
 </style>
 </head>
 <body>
@@ -105,12 +165,22 @@
     </div>
   </header>
 
+  <nav class="toc">
+    <div class="row">
+      <a href="#abstract">Abstract</a>
+      <a href="#method">Method</a>
+      <a href="#results">Key Results</a>
+      <a href="#takeaways">Takeaways</a>
+      <a href="#bibtex">BibTeX</a>
+    </div>
+  </nav>
+
   <section class="teaser">
     <img src="assets/gentract.gif" alt="GenTract generated tractography" />
-    <div class="cap">GenTract generates complete, anatomically plausible streamlines directly from diffusion MRI.</div>
+    <div class="cap">GenTract generates complete, anatomically plausible white-matter streamlines directly from diffusion MRI.</div>
   </section>
 
-  <section class="abstract">
+  <section id="abstract" class="abstract">
     <h2>Abstract</h2>
     <p>
       Tractography is the process of inferring the trajectories of white-matter pathways in the brain
@@ -130,6 +200,73 @@
       precision on research-grade data while also maintaining reliability on imperfect, lower-resolution
       data, GenTract represents a promising solution for global tractography.
     </p>
+  </section>
+
+  <section id="method">
+    <h2>Method</h2>
+    <p class="lead">
+      GenTract reframes tractography as a <strong>generative</strong> task: instead of taking thousands of
+      local stepwise decisions, it generates each <strong>entire streamline in one shot</strong>,
+      conditioned on the underlying fibre orientation field.
+    </p>
+
+    <div class="figure">
+      <img src="assets/pipeline.png" alt="GenTract framework: VAE encoding of fODF coefficients, Diffusion and flow-matching training, and conditional inference" />
+    </div>
+    <div class="cap">
+      The GenTract framework. <strong>(A)</strong> Per-coefficient VAEs encode fODF coefficients into latent
+      representations. <strong>(B1, B2)</strong> Training the Diffusion and flow-matching generators on the learned
+      latents, with losses back-propagated through both the generator and the class-conditioned encoder.
+      <strong>(C)</strong> Inference: whole streamlines are generated from Gaussian noise, conditioned on the
+      anatomical context <em>z</em>.
+    </div>
+
+    <div class="two-col">
+      <div class="feature">
+        <h3>Global by construction</h3>
+        <p>Because a full streamline is produced at once rather than traced step-by-step, GenTract avoids the
+        error accumulation and false positives that plague local tracking — the benefit of global methods,
+        without their heavy optimisation cost.</p>
+      </div>
+      <div class="feature">
+        <h3>Diffusion &amp; flow matching</h3>
+        <p>We study two generative paradigms for the streamline generator — a denoising diffusion model and a
+        flow-matching model — and compare them head-to-head against state-of-the-art tractography baselines.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="results">
+    <h2>Key Results</h2>
+    <p class="lead">GenTract sets a new precision bar, with the largest gains exactly where existing methods
+    struggle most — low-resolution and noisy data.</p>
+    <div class="stats">
+      <div class="stat">
+        <div class="num">1.8&times;</div>
+        <div class="lbl">Higher precision</div>
+        <div class="sub">vs. DDTracking</div>
+      </div>
+      <div class="stat">
+        <div class="num">2.1&times;</div>
+        <div class="lbl">Higher precision</div>
+        <div class="sub">vs. TractOracle</div>
+      </div>
+      <div class="stat">
+        <div class="num">3.5&times;</div>
+        <div class="lbl">Better than closest competitor</div>
+        <div class="sub">in low-res &amp; noisy settings</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="takeaways">
+    <h2>Takeaways</h2>
+    <ul class="takeaways">
+      <li>The <strong>first generative model for global tractography</strong>, learning a direct mapping from dMRI to complete streamlines.</li>
+      <li>Generating whole streamlines at once sidesteps the <strong>error accumulation</strong> of stepwise local tracking and the <strong>compute cost</strong> of classical global optimisation.</li>
+      <li><strong>State-of-the-art precision</strong>, with especially large margins on imperfect, lower-resolution and noisy acquisitions.</li>
+      <li>Code is <strong>open-source</strong> — train the VAEs, compute latents, train the generator, and run inference end-to-end.</li>
+    </ul>
   </section>
 
   <section id="bibtex">
