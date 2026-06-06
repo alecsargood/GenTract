@@ -210,15 +210,13 @@
       conditioned on the underlying fibre orientation field.
     </p>
 
-    <div class="figure">
-      <img src="assets/pipeline.png" alt="GenTract framework: VAE encoding of fODF coefficients, Diffusion and flow-matching training, and conditional inference" />
+    <div class="figure" style="max-width:560px; margin-left:auto; margin-right:auto">
+      <img src="assets/overview.png" alt="GenTract overview: a global embedding of the input diffusion MRI conditions a generative model that maps Gaussian noise to streamlines, forming the output tractogram" />
     </div>
     <div class="cap">
-      The GenTract framework. <strong>(A)</strong> Per-coefficient VAEs encode fODF coefficients into latent
-      representations. <strong>(B1, B2)</strong> Training the Diffusion and flow-matching generators on the learned
-      latents, with losses back-propagated through both the generator and the class-conditioned encoder.
-      <strong>(C)</strong> Inference: whole streamlines are generated from Gaussian noise, conditioned on the
-      anatomical context <em>z</em>.
+      Overview of GenTract. A learned global embedding <em>z</em> represents the whole-brain dMRI information.
+      Starting from Gaussian noise <em>&epsilon;</em>, all coordinates of each streamline are generated in
+      parallel and collated into the output tractogram.
     </div>
 
     <div class="two-col">
